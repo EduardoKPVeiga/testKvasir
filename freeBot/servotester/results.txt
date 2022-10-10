@@ -1,0 +1,37 @@
+Robot 0
+
+Servo 1: 83
+Servo 2: 82
+Servo 3: 95
+Servo 4: 84
+
+
+/*=======================================================================*/
+
+
+Robot 1
+
+Servo 1: 105
+Servo 2: 99
+Servo 3: 114
+Servo 4: 100
+
+
+
+    Robô 0:
+#define MOTOR1_ADJUST_SPEED 84
+#define MOTOR2_ADJUST_SPEED 90
+#define MOTOR3_ADJUST_SPEED 85
+#define MOTOR4_ADJUST_SPEED 77
+
+    Robô 1:
+#define MOTOR1_ADJUST_SPEED 74
+#define MOTOR2_ADJUST_SPEED 85
+#define MOTOR3_ADJUST_SPEED 80
+#define MOTOR4_ADJUST_SPEED 86
+
+    Robô 2:
+#define MOTOR1_ADJUST_SPEED 108
+#define MOTOR2_ADJUST_SPEED 70
+#define MOTOR3_ADJUST_SPEED 94
+#define MOTOR4_ADJUST_SPEED 85

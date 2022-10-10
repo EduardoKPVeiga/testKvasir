@@ -1,0 +1,7 @@
+/home/laser/Desktop/Kvasir/teste/Vard/build/CMakeFiles/rebuild_cache.dir
+/home/laser/Desktop/Kvasir/teste/Vard/build/CMakeFiles/edit_cache.dir
+/home/laser/Desktop/Kvasir/teste/Vard/build/include/CMakeFiles/rebuild_cache.dir
+/home/laser/Desktop/Kvasir/teste/Vard/build/include/CMakeFiles/edit_cache.dir
+/home/laser/Desktop/Kvasir/teste/Vard/build/source/CMakeFiles/rebuild_cache.dir
+/home/laser/Desktop/Kvasir/teste/Vard/build/source/CMakeFiles/edit_cache.dir
+/home/laser/Desktop/Kvasir/teste/Vard/build/source/CMakeFiles/Vard.dir
