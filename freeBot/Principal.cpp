@@ -21,12 +21,12 @@ void Principal::start()
         else {
             robot->move(0, 0, 0);
         }
-        delay(3000);
-        /*if(millis()-time >=1000)
+        delay(COMMUNICATION_DELAY);
+        if(millis()-time >=1000)
         {
             time = millis();
             Serial.println("1 segundo");
-        }*/
+        }
     }
     
 }

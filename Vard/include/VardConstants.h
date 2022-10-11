@@ -17,7 +17,7 @@
 #define CPORT_NR 16 // 16 to USB0 - 17 to USB1 - 18 to USB2
 #define KEY 0xa0
 #define BEGIN 0x77
-#define COMMUNICATION_DELAY 10000//3333 - delay em us da comunicacao (3350 eh o maximo que o arduino le sem baguncar pacotes)
+#define COMMUNICATION_DELAY 3333 // 3333 - delay em us da comunicacao (3350 eh o maximo que o arduino le sem baguncar pacotes)
 
 
 #endif

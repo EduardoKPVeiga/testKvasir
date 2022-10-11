@@ -2,6 +2,7 @@
 
 RFreceiver::RFreceiver()
 {
+    bool debug = true;
     vel_x = 0;
     vel_y = 0;
     vel_ang = 0;
@@ -19,19 +20,27 @@ void RFreceiver::receiveData()
     int i;
     unsigned char data[W_DATA];
 #ifndef XBEE
+    if(debug) {
+        Serial.print("Radio Available: ");
+        Serial.println(radio->available());
+    }
+    
     if(radio->available())
     {
         radio->read(&data,W_DATA);
-        
-        Serial.print("recebendo ");
-        if(data[0]==NAME && data[1]!=0)//se for 0 eh pq deu erro no envio
+        if(debug)
+            Serial.print("Recebendo... ");
+        if(data[0]==NAME && data[1]!=0) // se for 0 eh pq deu erro no envio
         {
-            Serial.print("Data recebida: ");
+            if(debug)
+                Serial.print("Data recebida: ");
             for(i=0; i<W_DATA; i++)
             {
                 queue = queue->addByte(data[i], queue);
-                Serial.print(data[i], HEX);
-                Serial.print("  ");
+                if(debug) {
+                    Serial.print(data[i], HEX);
+                    Serial.print("  ");
+                }
             }
         }
         else
@@ -63,34 +72,41 @@ int RFreceiver::updateBuffer()
     int i;
     if(queue == NULL) {
         return 0;
-        }
+    }
+
     if(debug){
         if(queue != NULL) {
             Serial.print("Update queue->getSize(): ");
             Serial.println(queue->getSize());
         }
     }
-    if(queue != NULL && queue->getSize()<W_DATA)//nao tem um pacote completo
-    {
+
+    if(queue->getSize()<W_DATA) { // nao tem um pacote completo
         return 0;
     }
-    while(queue!=NULL&&queue->getByte()!=KEY)
-    {
-        if(debug){
+
+    Serial.print("");
+
+    while(queue->getByte()!=KEY) { // Remove o 'nome' e a 'KEY' da queue, restando somente as velocidades
+        if(debug) {
             Serial.print(queue->getByte());
             Serial.print(" - ");
         }
         queue = queue->removeByte(queue);
     }
-    if(queue!=NULL&&queue->getByte()==KEY&&queue->getSize()>DATA_SIZE)//mudar isso, passar para constantes
-    {
+
+    Serial.print(queue->getByte());
+
+    if(queue->getByte()==KEY && queue->getSize()>DATA_SIZE) { // mudar isso, passar para constantes
         Serial.println("Vetor Input Byte:");
-        for(i=0; i<DATA_SIZE; i++)
-        {
+        for(i=0; i<DATA_SIZE; i++) {
             queue = queue->removeByte(queue);
             input_byte[i] = queue->getByte();
-            Serial.print(input_byte[i]);
-            Serial.print(" - ");
+
+            if(debug) {
+                Serial.print(input_byte[i]);
+                Serial.print(" - ");
+            }
         }
 	//estas operacoes convertem 4 char em 1 float
         vel_x = *(float*)&input_byte[0];

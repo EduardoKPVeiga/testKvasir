@@ -20,6 +20,11 @@ SerialCommunication::SerialCommunication()
 int SerialCommunication::receiveRS232()
 {
     int i, siz;
+
+    siz = Serial1.readBytes(received_data, W_DATA+W_ADDRESS+1);
+    Serial1.flush();
+
+    //* Teste de comunicação direto pelo arduino MEGA (Não rodar o Vard!)
     char string_velX[4];
     char string_velY[4];
     char string_velAng[4];
@@ -45,13 +50,18 @@ int SerialCommunication::receiveRS232()
         received_data[16+i]=string_velAng[i];
     }
     //Serial1.flush();
+    //*/
 
     if(siz==W_DATA+W_ADDRESS+1 && received_data[0] == BEGIN)
     {
         return 1;
+        
     }
     else
     {
+        // Gambiarra para tentar sincronizar o buffer circular do arduino
+        siz = Serial1.readBytes(received_data, 1);
+        Serial1.flush();
         return 0;
     }
 }

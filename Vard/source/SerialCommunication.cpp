@@ -22,17 +22,16 @@ SerialCommunication::~SerialCommunication()
 
 void SerialCommunication::sendData()
 {
-    /*
-    Print dos dados que estão sendo enviados
+    
+    //Print dos dados que estão sendo enviados
     for (int i = 0; i < PACKET_SIZE; i++)
     {
         std::cout << int(data[i]) << "\t";
     }
     std::cout << std::endl;
-    //*/
+    
 
     RS232_SendBuf(CPORT_NR, (unsigned char*) data, PACKET_SIZE);
-    //usleep(86180); // (micro segundos) tentativa de sincronizar o PC com o Mega
 }
 
 void SerialCommunication::mountPacket(int name, char *rf_address, float vel_x, float vel_y, float vel_ang)
@@ -45,6 +44,24 @@ void SerialCommunication::mountPacket(int name, char *rf_address, float vel_x, f
     *((float*)&string_velX) = vel_x;
     *((float*)&string_velY) = vel_y;
     *((float*)&string_velAng) = vel_ang;
+
+    std::cout << "Vel X: ";
+    for(i = 0; i < 4; i++) {
+        std::cout << string_velX[i] << " - ";
+    }
+    std::cout << std::endl << std::endl;
+
+    std::cout << "Vel Y: ";
+    for(i = 0; i < 4; i++) {
+        std::cout << string_velY[i] << " - ";
+    }
+    std::cout << std::endl << std::endl;
+
+    std::cout << "Vel Ang: ";
+    for(i = 0; i < 4; i++) {
+        std::cout << string_velAng[i] << " - ";
+    }
+    std::cout << std::endl << std::endl;
 
     //reinterpret_cast<float*>(string_velX) = vel_x;
     //reinterpret_cast<float*>(string_velY) = vel_y;

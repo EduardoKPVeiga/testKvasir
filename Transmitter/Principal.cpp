@@ -8,6 +8,8 @@ Principal::Principal()
 
 void Principal::start()
 {
+    bool debug = true;
+    bool receiveRS232_bool;
     uint8_t address[W_ADDRESS];
     unsigned char data[W_DATA];
     char name;
@@ -15,12 +17,32 @@ void Principal::start()
     int qt = 0;
 	  while(1)
 	  {
+        receiveRS232_bool = serial->receiveRS232();
         Serial.println(".");
-        if(serial->receiveRS232())
+        if(debug) {
+            Serial.print("receiveRS232: ");
+            Serial.println(receiveRS232_bool);
+        }
+
+        if(receiveRS232_bool)
         {
             digitalWrite(13, HIGH);
             serial->getAddress(address);
+            if(debug) {
+                Serial.print("Address: ");
+                for(int i = 0; i < W_ADDRESS; i++) {
+                    Serial.print((char) address[i]);
+                    Serial.print(" - ");
+                }
+                Serial.println("");
+            }
+
             name = serial->getName();
+            if(debug) {
+                Serial.print("Name: ");
+                Serial.println((int) name);
+            }
+
             if(name == 0)
             {
               qt++;
@@ -38,6 +60,16 @@ void Principal::start()
         {
             time = millis();
         }
-        delay(1000);
+
+        if(debug) {
+            Serial.print("Dados: ");
+            for(int i = 0; i < W_DATA; i++) {
+                Serial.print(data[i]);
+                Serial.print(" - ");
+            }
+            Serial.println("");
+        }
+
+        delay(10);
     }
 }
